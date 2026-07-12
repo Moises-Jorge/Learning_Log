@@ -1,5 +1,18 @@
 {% extends 'l_logs/base.html' %}
 
 {% block content %}
-
+	<p>Topico: {{ topic }}</p>
+	<p>Anotações:</p>
+	<ul>
+		{% for annotation in annotations %}
+			<li>
+				<p>{{ annotation.date_added | date:'M d, Y H:i' }}</p>
+				<p>{{ annotation.text | linebreaks }}</p>
+				<a href="">Editar</a>
+			</li>
+		{% empty %}
+			<p>Não há qualquer registro!</p>
+		{% endfor %}
+	</ul>
+	<a href="">Adicionar Anotação</a>
 {% endblock content %}

@@ -15,6 +15,16 @@ class TopicsView(View):
 		}
         return render(request, 'l_logs/topics.html', context)
 
+class TopicView(View):
+    def get(self, request, topic_id):
+        topic = TopicModel.objects.get(id = topic_id)
+        annotations = topic.annotations.order_by('-date_added')
+        context = {
+			'topic': topic,
+			'annotations': annotations,
+		}
+        return render(request, 'l_logs/topic.html', context)
+
 class NewTopicView(View):
     def get(self, request):
         form = TopicForm()
