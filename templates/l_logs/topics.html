@@ -1,5 +1,15 @@
 {% extends 'l_logs/base.html' %}
 
 {% block content %}
-
+	<p>Topicos:</p>
+	<ul>
+		{% for topic in topics %}
+			<li>
+				<a href="">{{ topic }}</a>
+			</li>
+		{% empty %}
+			<p>Não há qualquer registro!</p>
+		{% endfor %}
+	</ul>
+	<a href="">Adicionar Topico</a>
 {% endblock content %}
