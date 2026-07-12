@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import View
 from .models import TopicModel, AnnotationModel
+from .forms import TopicForm, AnnotationForm
 
 class IndexView(View):
 	def get(self, request):
@@ -13,3 +14,21 @@ class TopicsView(View):
 			'topics': topics,
 		}
         return render(request, 'l_logs/topics.html', context)
+
+class NewTopicView(View):
+    def get(self, request):
+        form = TopicForm()
+        context = {
+			'form': form,
+		}
+        return render(request, 'l_logs/new_topic.html', context)
+
+    def post(self, request):
+        form = TopicForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('topics')
+        context = {
+			'form': form,
+		}
+        return render(request, 'l_logs/new_topic.html', context)

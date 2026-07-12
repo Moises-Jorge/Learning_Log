@@ -1,5 +1,10 @@
 {% extends 'l_logs/base.html' %}
 
 {% block content %}
-
+	<p>Adicionef um novo topico:</p>
+	<form action="{% url 'new_topic' %}" method="post">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button name="submit">Adicionar</button>
+	</form>
 {% endblock content %}
