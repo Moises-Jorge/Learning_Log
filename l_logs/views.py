@@ -42,3 +42,27 @@ class NewTopicView(View):
 			'form': form,
 		}
         return render(request, 'l_logs/new_topic.html', context)
+
+class NewAnnotationView(View):
+    def get(self, request, topic_id):
+        topic = TopicModel.objects.get(id = topic_id)
+        form = AnnotationForm()
+        context = {
+            'topic': topic,
+            'form': form,
+        }
+        return render(request, 'l_logs/new_annotation.html', context)
+
+    def post(self, request, topic_id):
+        topic = TopicModel.objects.get(id = topic_id)
+        form = AnnotationForm(data=request.POST)
+        if form.is_valid():
+            new_annotation = form.save(commit=False)
+            new_annotation.topic_id = topic
+            new_annotation.save()
+            return redirect('topic', topic_id)
+        context = {
+            'topic': topic,
+            'form': form,
+        }
+        return render(request, 'l_logs/annotation.html', context)

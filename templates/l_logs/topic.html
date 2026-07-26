@@ -14,5 +14,5 @@
 			<p>Não há qualquer registro!</p>
 		{% endfor %}
 	</ul>
-	<a href="">Adicionar Anotação</a>
+	<a href="{% url 'new_annotation' topic.id %}">Adicionar Anotação</a>
 {% endblock content %}
