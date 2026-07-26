@@ -66,3 +66,31 @@ class NewAnnotationView(View):
             'form': form,
         }
         return render(request, 'l_logs/annotation.html', context)
+
+
+class EditAnnotation(View):
+    def get(self, request, annotation_id):
+        annotation = AnnotationModel.objects.get(id = annotation_id)
+        topic = annotation.topic_id
+        form = AnnotationForm(instance=annotation)
+        context = {
+            'annotation': annotation,
+            'topic': topic,
+            'form': form
+        }
+        return render(request, 'l_logs/edit_annotation.html', context)
+
+    def post(self, request, annotation_id):
+        annotation = AnnotationModel.objects.get(id = annotation_id)
+        topic = annotation.topic_id
+        form = AnnotationForm(instance=annotation, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect ('topic', topic.id)
+        context = {
+            'annotation': annotation,
+            'topic': topic,
+            'form': form,
+        }
+        return render(request, 'l_logs/edit_annotation.html', context)
+
