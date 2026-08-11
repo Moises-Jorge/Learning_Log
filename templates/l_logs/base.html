@@ -1,5 +1,12 @@
-<a href="{% url 'index' %}">LOGO</a> -
-<a href="{% url 'topics' %}">Topicos</a>
+<p>
+	<a href="{% url 'index' %}">LOGO</a> -
+	<a href="{% url 'topics' %}">Topicos</a>
+	{% if user.is_authenticated %}
+		Ola, {{ user.username }}
+	{% else %}
+		<a href="{% url 'login' %}">Entrar</a>
+	{% endif %}
+</p>
 
 {% block content %}
 	<!-- Here, we put content of each page -->
