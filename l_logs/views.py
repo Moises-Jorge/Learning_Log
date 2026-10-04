@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import TopicModel, AnnotationModel
 from .forms import TopicForm, AnnotationForm
 
@@ -7,7 +8,7 @@ class IndexView(View):
 	def get(self, request):
 		return render(request, 'l_logs/index.html')
 
-class TopicsView(View):
+class TopicsView(LoginRequiredMixin, View):
     def get(self, request):
         topics = TopicModel.objects.order_by('date_added')
         context = {
@@ -15,7 +16,7 @@ class TopicsView(View):
 		}
         return render(request, 'l_logs/topics.html', context)
 
-class TopicView(View):
+class TopicView(LoginRequiredMixin, View):
     def get(self, request, topic_id):
         topic = TopicModel.objects.get(id = topic_id)
         annotations = topic.annotations.order_by('-date_added')
@@ -25,7 +26,7 @@ class TopicView(View):
 		}
         return render(request, 'l_logs/topic.html', context)
 
-class NewTopicView(View):
+class NewTopicView(LoginRequiredMixin, View):
     def get(self, request):
         form = TopicForm()
         context = {
@@ -43,7 +44,7 @@ class NewTopicView(View):
 		}
         return render(request, 'l_logs/new_topic.html', context)
 
-class NewAnnotationView(View):
+class NewAnnotationView(LoginRequiredMixin, View):
     def get(self, request, topic_id):
         topic = TopicModel.objects.get(id = topic_id)
         form = AnnotationForm()
@@ -68,7 +69,7 @@ class NewAnnotationView(View):
         return render(request, 'l_logs/annotation.html', context)
 
 
-class EditAnnotation(View):
+class EditAnnotation(LoginRequiredMixin, View):
     def get(self, request, annotation_id):
         annotation = AnnotationModel.objects.get(id = annotation_id)
         topic = annotation.topic_id
