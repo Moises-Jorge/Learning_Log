@@ -11,6 +11,9 @@ class LogoutView(View):
 
 class RegisterView(View):
     def get(self, request):
+        if (request.user.is_authenticated):
+            return redirect('index')
+        
         form = UserCreationForm()
         context = {
 			'form': form,
@@ -18,6 +21,9 @@ class RegisterView(View):
         return render(request, 'users/register.html', context)
 
     def post(self, request):
+        if (request.user.is_authenticated):
+            return redirect('index')
+
         form = UserCreationForm(data=request.POST)
         if form.is_valid():
             new_user = form.save()
