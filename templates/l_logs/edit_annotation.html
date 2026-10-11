@@ -10,7 +10,7 @@
 {% block content %}
 	<h3>Editar anotacao:</h3>
 
-	<form action="{% url 'edit_entry' entry.id %}" method="post" class="form">
+	<form action="{% url 'edit_annotation' annotation.id %}" method="post" class="form">
 		{% csrf_token %}
 		{% bootstrap_form form %}
 
