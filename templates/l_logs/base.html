@@ -1,15 +1,76 @@
-<p>
-	<a href="{% url 'index' %}">LOGO</a> -
-	<a href="{% url 'topics' %}">Topicos</a>
-	{% if user.is_authenticated %}
-		Ola, {{ user.username }}
-		<a href="{% url 'logout' %}">Sair</a>
-	{% else %}
-		<a href="{% url 'login' %}">Entrar</a>
-		<a href="{% url 'register' %}">Registrar</a>
-	{% endif %}
-</p>
+{% load bootstrap3 %}
 
-{% block content %}
-	<!-- Here, we put content of each page -->
-{% endblock content %}
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="Aplicacao para anotacoes.">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="keywords" content="anotacoes, anotacao">
+		<meta name="author" content="Moises Jorge">
+
+		<title>Learning Log</title>
+
+		<!-- Indicacao de que estamos estilizando com BOOTSTRAP -->
+		{% bootstrap_css %}
+		{% bootstrap_javascript %}
+	</head>
+
+	<body>
+
+		<nav class="navbar navbar-default navbar-static-top">
+			<div class="container-fluid"> <!-- o original nao usou fluid -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+						<!-- Botao do menu hamburguer -->
+					</button>
+					<a class="navbar-brand" href="{% url 'index' %}">Learning Log</a>
+				</div>
+
+				<div class="collapse navbar-collapse" id="navbar">
+					<ul class="nav navbar-nav">
+						<li>
+							<a href="{% url 'topics' %}">Topicos</a>
+						</li>
+					</ul>
+
+					<ul class="nav navbar-nav navbar-right">
+						{% if user.is_authenticated %}
+							<li>
+								<a>Ola, {{ user.username }}</a>
+							</li>
+
+							<li>
+								<a href="{% url 'logout' %}">Sair</a>
+							</li>
+						{% else %}
+							<li>
+								<a href="{% url 'login' %}">Entrar</a>
+							</li>
+
+							<li>
+								<a href="{% url 'register' %}">Registrar</a>
+							</li>
+						{% endif %}
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<div class="container-fluid">
+			<div>
+				{% block header %}
+					<!-- Conteudo header da pagina filha -->
+				{% endblock header %}
+			</div>
+
+			<div>
+				{% block content %}
+					<!-- Conteudo da pagina filha -->
+				{% endblock content %}
+			</div>
+		</div>
+
+	</body>
+</html>
