@@ -10,7 +10,7 @@
 {% endblock header %}
 
 {% block content %}
-	<h3>Adicione uma nova anotacao:</h3>
+	<h3>Adicione uma nova anotação:</h3>
 
 	<form action="{% url 'new_annotation' topic.id %}" method="post" class="form">
 		{% csrf_token %}

@@ -1,7 +1,7 @@
 {% extends 'l_logs/base.html' %}
 
 {% block header %}
-	<h1>Topicos:</h1>
+	<h1>Tópicos:</h1>
 {% endblock header %}
 
 {% block content %}
@@ -15,12 +15,12 @@
 				</h3>
 			</li>
 		{% empty %}
-			<li>Nao ha qualquer topico registrado!</li>
+			<li>Não há qualquer tópico registrado!</li>
 		{% endfor %}
 	</ul>
 	<h3>
 		<a href="{% url 'new_topic' %}">
-			Adicionar novo topico
+			Adicionar novo tópico
 		</a>
 	</h3>
 {% endblock content %}

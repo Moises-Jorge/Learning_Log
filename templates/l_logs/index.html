@@ -9,15 +9,15 @@
 {% block content %}
 	{% if user.is_authenticated %}
 		<h2>
-			Sempre que voce aprender algo novo sobre um topico, faca uma entrada resumindo o que voce aprendeu.
+			Sempre que você aprender algo novo sobre um tópicos faça uma anotação resumindo o que você aprendeu.
 		</h2>
 	{% else %}
 		<h2>
-			<a href="{% url 'register' %}">Crie uma conta</a> para utilizar o Learning Log e liste os topicos que voce esta aprendendo.
+			<a href="{% url 'register' %}">Crie uma conta</a> para utilizar o Learning Log e liste os tópicos que você esta aprendendo.
 		</h2>
 
 		<h2>
-			Sempre que voce aprender algo novo sobre um topico, faca uma entrada resumindo o que voce aprendeu.
+			Sempre que você aprender algo novo sobre um tópicos faça uma anotação resumindo o que você aprendeu.
 		</h2>
 	{% endif %}
 {% endblock content %}
