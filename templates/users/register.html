@@ -1,9 +1,25 @@
 {% extends 'l_logs/base.html' %}
+{% load bootstrap3 %}
+
+{% block header %}
+	<h1>
+		Criar conta
+	</h1>
+{% endblock header %}
 
 {% block content %}
-	<form action="{% url 'register' %}" method="post" >
+	{% if form.errors %}
+		<p style="color: red;">* The username must not contain numbers or special characters.</p>
+		<p style="color: red;">* The password must be at least 8 characters long, combining letters, numbers, and special characters, and cannot contain the username. </p>
+		<p style="color: red;">* The entered passwords must match.</p>
+	{% endif %}
+
+	<form action="{% url 'register' %}" method="post" class="ul-none form">
 		{% csrf_token %}
-		{{ form.as_p }}
-		<button name="submit">Registrar</button>
+		{% bootstrap_form form %}
+
+		{% buttons %}
+			<button name="submit" class="btn btn-primary">Registrar</button>
+		{% endbuttons %}
 	</form>
 {% endblock content %}
